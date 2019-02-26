@@ -1,5 +1,5 @@
 # PS
-This repo will contain some codes for learning problem solving skills
+This repo will contain my codes to learn algorithms & problem solving skills
 
 # Codeforces
 # BOJ
