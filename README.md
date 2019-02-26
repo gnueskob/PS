@@ -1,15 +1,15 @@
 # PS
-This repo will contain my codes to learn algorithms & problem solving skills
-handle : 'gnues' or 'gnueskob'
-
+This repo will contain my codes to learn **algorithms & problem solving skills**
+handle : **gnues** or **gnueskob**
+***
 # Online Judge & Problem set
-# Local
+## Local
  * BOJ(baekjoon): https://www.acmicpc.net/
  * JONGOL: http://www.jungol.co.kr/
  * ALGOSPOT: https://algospot.com/
  * KOI: http://koistudy.net/
 
-# Global
+## Global
  * codeforces: http://codeforces.com/
  * TopCoder: https://community.topcoder.com/contest/arena/ContestAppletProd.jnlp (arena app.)
  * uvaoj: https://uva.onlinejudge.org + https://uhunt.onlinejudge.org
