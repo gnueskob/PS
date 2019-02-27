@@ -1,6 +1,6 @@
 # Problem Solving repository info.
- This repo will contain my codes to learn **algorithms & problem solving skills** 
- 
+ This repo will contain my codes to learn **algorithms & problem solving skills**
+
  handle : **gnues** or **gnueskob**
 ***
 
