@@ -1,3 +1,5 @@
+// Load Balancing (Bronze)
+// https://www.acmicpc.net/problem/12001
 #include<iostream>
 #include<tuple>
 using namespace std;

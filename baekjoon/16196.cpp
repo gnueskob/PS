@@ -1,3 +1,5 @@
+// 중국 신분증 번호
+// https://www.acmicpc.net/problem/16196
 #include <iostream>
 #include <string>
 using namespace std;
@@ -59,7 +61,7 @@ int main() {
   // checkSum ver.1
   // int x = 1 - (codeSum % 11);
   // if (x < 0) x += 11;
-  
+
   // char checkSum;
   // if (x == 10) checkSum = 'X';
   // else checkSum = x + '0';
@@ -93,7 +95,7 @@ int main() {
   return 0;
 }
 
-bool isValidDate(int year, int month, int day) {  
+bool isValidDate(int year, int month, int day) {
   int days[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
   if (year < 1900 || year > 2011) return false;
@@ -103,6 +105,6 @@ bool isValidDate(int year, int month, int day) {
   if ((year % 4 == 0) - (year % 100 == 0) + (year % 400 == 0)) days[2] = 29;
 
   if (day > days[month]) return false;
-  
+
   return true;
-}  
+}
