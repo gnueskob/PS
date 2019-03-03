@@ -3,13 +3,49 @@ using namespace std;
 
 /**
  * Linux OS based memory mapping code to read input very fast.
- * Only function reading int type exists.
  */
+/**
+ * Normally used form of stat & mmap
+ * But can not declare struct stat.
+ * struct stat buf; fstat(0, &buf);
+ * char* s = (char*) mmap(0, buf.st_size, PROT_READ | PROT_WRITE, MAP_PRIVATE, 0, 0), *c = s;
+ */
+// #include <unistd.h>
 // #include <sys/stat.h>
 // #include <sys/mman.h>
-// int z[36];
-// char* c= (char*) mmap(0, z[12], 1, 2, 0, fstat(0, (struct stat*) z));
-// inline int readInt() { int x=0; bool e; c += e = *c == '-'; while(*c >= '0') x=x*10 + *c++ - '0'; c++; return e ? -x : x; }
+// int buf[36];
+// char* s = (char*) mmap(0, buf[12], 3, 2, 0, fstat(0, (struct stat*)buf)), *c = s;
+// inline int readInt() {
+//   int x=0; bool e;
+//   c += e = *c == '-';
+//   while(*c >= '0') x = x*10 + *c++ - '0'; c++;
+//   return e ? -x : x;
+// }
+/**
+ * After read all about input, the memory (*c: used to store input with mmap) is not used anymore.
+ * So, we use this memory to store output characters what we write with 'write' function of linux.
+ * When reading input is done, the starting memory address(sma) of mmap should be set to c again.
+ * This is why we should use resetBuf() function (c = s) before write characters.
+ * After assign all of output characters to c, then, c-s will be the length of output characters.
+ * if 'write(1, s, c-s)' is called, the characters what we stored to write in 'c' will be output to stdout.
+ * Notice: Writing with 'c' should be done only when the number of output characters is fewer than input length.
+ */
+// inline void writeChar(char x) { *c++ = x; }
+// // (signed) char, short, int, long, long long ...
+// template <class T>
+// inline void writeInt(T x, char end) {
+//   if(x < 0) writeChar('-'), x = -x;
+//   char s[24];
+//   int n = 0;
+//   while(x || !n) s[n++] = '0' + x % 10, x /= 10;
+//   while(n--) writeChar(s[n]);
+//   if(end) writeChar(end);
+// }
+// inline void resetBuf() { c = s; }
+// struct Flusher {
+//   ~Flusher() { write(1, s, c-s); }
+// } flusher;
+
 
 static const int rbuf_size = 1 << 21;
 static const int wbuf_size = 1 << 21;
