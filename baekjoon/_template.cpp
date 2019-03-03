@@ -1,6 +1,6 @@
 // problem_name
 // url
-#include<iostream>
+#include<bits/stdc++.h>
 using namespace std;
 
 int main() {

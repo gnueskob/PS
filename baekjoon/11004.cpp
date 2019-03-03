@@ -1,18 +1,10 @@
-#include<iostream>
+// K번째 수
+// https://www.acmicpc.net/problem/11004
+#include<bits/stdc++.h>
 using namespace std;
 
-/**
- * Linux OS based memory mapping code to read input very fast.
- * Only function reading int type exists.
- */
-// #include <sys/stat.h>
-// #include <sys/mman.h>
-// int z[36];
-// char* c= (char*) mmap(0, z[12], 1, 2, 0, fstat(0, (struct stat*) z));
-// inline int readInt() { int x=0; bool e; c += e = *c == '-'; while(*c >= '0') x=x*10 + *c++ - '0'; c++; return e ? -x : x; }
-
-static const int rbuf_size = 1 << 21;
-static const int wbuf_size = 1 << 21;
+static const int rbuf_size = 1 << 24;
+static const int wbuf_size = 1 << 5;
 
 inline int getChar() {
   static char buf[rbuf_size];
@@ -26,12 +18,6 @@ inline int readChar() {
   int c = getChar();
   while (c <= 32) c = getChar();
   return c;
-}
-
-inline int readWord(char* str) {
-  char c; int len=0;
-  while((c=getChar()) != '\n' && c != ' ' && c > 32) *str++=c, len++; *str=0;
-  return len;
 }
 
 template <class T = int>
@@ -62,19 +48,19 @@ inline void writeInt(T x, char end) {
   if (end) writeChar(end);
 }
 
-inline void writeWord(const char *s) {
-  while (*s) writeChar(*s++);
-}
-
 struct Flusher {
   ~Flusher() {
     if (write_pos) fwrite(write_buf, 1, write_pos, stdout), write_pos = 0;
   }
 } flusher;
 
+int n[5000000];
 int main() {
-  int n = readInt();
-  writeInt(n, '\n');
-  writeWord("string");
+  freopen("./baekjoon/input/11004.txt", "r", stdin);
+  int N, K, t;
+  N = readInt(), K = readInt();
+  for(int i=0; i<N; i++) n[i] = readInt();
+  nth_element(n, n + K-1, n + N);
+  writeInt(n[K-1],0);
   return 0;
 }
