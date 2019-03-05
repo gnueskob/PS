@@ -10,6 +10,15 @@ using namespace std;
  * struct stat buf; fstat(0, &buf);
  * char* s = (char*) mmap(0, buf.st_size, PROT_READ | PROT_WRITE, MAP_PRIVATE, 0, 0), *c = s;
  */
+/**
+ * After read all about input, the memory (*c: used to store input with mmap) is not used anymore.
+ * So, we use this memory to store output characters what we write with 'write' function of linux.
+ * When reading input is done, the starting memory address(sma) of mmap should be set to c again.
+ * This is why we should use resetBuf() function (c = s) before write characters.
+ * After assign all of output characters to c, then, c-s will be the length of output characters.
+ * if 'write(1, s, c-s)' is called, the characters what we stored to write in 'c' will be output to stdout.
+ * Notice: Writing with 'c' should be done only when the number of output characters is fewer than input length.
+ */
 // #include <unistd.h>
 // #include <sys/stat.h>
 // #include <sys/mman.h>
@@ -21,17 +30,7 @@ using namespace std;
 //   while(*c >= '0') x = x*10 + *c++ - '0'; c++;
 //   return e ? -x : x;
 // }
-/**
- * After read all about input, the memory (*c: used to store input with mmap) is not used anymore.
- * So, we use this memory to store output characters what we write with 'write' function of linux.
- * When reading input is done, the starting memory address(sma) of mmap should be set to c again.
- * This is why we should use resetBuf() function (c = s) before write characters.
- * After assign all of output characters to c, then, c-s will be the length of output characters.
- * if 'write(1, s, c-s)' is called, the characters what we stored to write in 'c' will be output to stdout.
- * Notice: Writing with 'c' should be done only when the number of output characters is fewer than input length.
- */
 // inline void writeChar(char x) { *c++ = x; }
-// // (signed) char, short, int, long, long long ...
 // template <class T>
 // inline void writeInt(T x, char end) {
 //   if(x < 0) writeChar('-'), x = -x;

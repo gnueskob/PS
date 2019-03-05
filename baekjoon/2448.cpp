@@ -10,6 +10,7 @@ char star[MAXH][MAX];
 void drawTriangle(int N) {
   int width = 2*N-1;
   for(int h=N; h>0; h--)
+  for(int h=N; h>0; h--)
     for(int i=0; i<width; i++)
       if(N-h<=i && i<width-N+h) star[h-1][i] = '*';
       else star[h-1][i] = ' ';
