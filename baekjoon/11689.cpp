@@ -8,7 +8,6 @@ int main() {
   ll n;
   scanf("%lld", &n);
   ll pi = n;
-  if(isPrimeEx(n)) return !printf("%d",n-1);
   if(!(n & 1)) {
     pi >>= 1;
     n /= n & -n;
