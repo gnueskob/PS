@@ -1,6 +1,4 @@
-#include<iostream>
-#include<cmath>
-#include<tuple>
+#include<bits/stdc++.h>
 using namespace std;
 
 typedef tuple<int, int, int> t3;
@@ -28,6 +26,9 @@ int main() {
   int a, b; cin >> a >> b;
   int gcd, s, t;
   tie(gcd, s, t) = extendedGCD(a,b);
-  cout << '(' << a << ")*(" << s << ") + (" << b << ")*(" << t << ") = " << gcd;
+  cout << '(' << a << ")*(" << s << ") + (" << b << ")*(" << t << ") = " << gcd << '\n';
+
+  // GCC 내장 함수 : __gcd(a, b);
+  cout << "builtin gcc __gcd : " << __gcd(a, b);
   return 0;
 }

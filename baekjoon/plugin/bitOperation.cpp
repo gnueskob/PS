@@ -45,7 +45,7 @@ T getHighestBit(T v) { for(int i=1; i<sizeof(v); i<<=1) v|= v >> i; return ++v >
 // set된 비트 중 가장 낮은 비트
 // ex) v = 1011 0100(2), return: 0000 0100(2)
 template <typename T>
-T getLowestBit(T v) { return v & (~v + 1); }
+T getLowestBit(T v) { return v & -v; }
 
 // 가장 높은 비트 앞으로 set된 mask
 // ex) v = 0001 0010(2), return: 1111 0000(2)
