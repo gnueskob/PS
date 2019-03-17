@@ -14,14 +14,24 @@ void resetBuf() {}
 
 int N;
 vector<pair<int, int>> node[100001];
+int dist[100001];
 
-int maxD, u;
-int dfs(int s, int p, int d) {
-  for(auto& tw : node[s]) {
-    int t = tw.I, w = tw.W;
-    if(t != p) dfs(t, s, d+w);
+int bfs(int s) {
+  fill(dist, dist+N+1, -1);
+  queue<int> q;
+  dist[s] = 0, q.push(s);
+  while(!q.empty()) {
+    int n = q.front(); q.pop();
+    for(int i=node[n].size(); i--;) {
+      int t = node[n][i].I, w = node[n][i].W;
+      if(dist[t] > -1) continue;
+      dist[t] = dist[n] + w;
+      q.push(t);
+    }
   }
-  if(maxD < d) maxD = d, u = s;
+  int res = 1;
+  for(int i=2; i<=N; i++) res = dist[res] < dist[i] ? i : res;
+  return res;
 }
 
 int main() {
@@ -35,8 +45,6 @@ int main() {
       node[s].emplace_back(make_pair(t, w));
     }
   }
-  dfs(1,1,0);
-  dfs(u,u,0);
-  printf("%d",maxD);
+  printf("%d",dist[bfs(bfs(1))]);
   return 0;
 }
