@@ -2,7 +2,7 @@
 using namespace std;
 
 /**
- * Union Find Alogrithm
+ * Union Find Algorithm
  * Disjoint Set 서로소 집합 자료구조
  * make-set(x) : 초기화 - x를 유일한 원소로 하는 새로운 집합을 만든다.
  * union(x, y) : 합하기 - x가 속한 집합과 y가 속한 집합을 합친다. 즉, x와 y가 속한 두 집합을 합치는 연산
