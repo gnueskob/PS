@@ -2,16 +2,26 @@
 using namespace std;
 
 const int MAX = 1e4 + 1;
-int discover[MAX], sccNum, cnt, scc[MAX], connectCnt[MAX];
+/**
+ * SCC(Strong Connected Component, 강 연결 요소) 알고리즘
+ * Reference: https://jason9319.tistory.com/98
+ *
+ * vt: 주어진 그래프
+ * rvt: 주어진 그래프의 역방향 그래프
+ * sccvt: SCC 요소로 이루어진 그래프(vt에서 cycle을 이루는 node들을 하나로 취급)
+ * scc: 해당 노드가 속하는 scc(cycle 그룹)
+ * sccNum: SCC 요소의 개수
+ * sccDetail: 해당 SCC 요소에 포함된 Node list
+ */
+int discover[MAX], sccNum, cnt, scc[MAX];
 stack<int> st;
 vector<vector<int>> vt, rvt, sccvt, sccDetail;
 
 /**
  * Tarjan Algorithm(타잔 알고리즘)
+ * Time Complexity : O(V + E) (V: 노드 개수, E: 간선개수, dfs이용)
  * directed graph(유향 그래프)를 한 번의 dfs로 순회하여 SCC를 구할 수 있음
  * discover: dfs로 검색하는 노드의 순서
- * scc: 해당 노드가 속하는 scc(cycle 그룹)
- * r: dfs가 끝난 후 scc 요소의 개수
  */
 int dfsT(int here) {
   discover[here] = ++cnt;
@@ -36,10 +46,9 @@ int dfsT(int here) {
 bool visit[MAX];
 /**
  * Kosaraju Algorithm(코사라주 알고리즘)
- * 그래프와 역그래프를 두 번의 dfs로 순회하여 SCC를 구할 수 있음
- * discover: dfs로 검색하는 노드의 순서
- * scc: 해당 노드가 속하는 scc(cycle 그룹)
- * r: dfs가 끝난 후 scc 요소의 개수
+ * Time Complexity : O(V + E) (V: 노드 개수, E: 간선개수, dfs이용)
+ * 그래프와 역그래프를 이용해 두 번의 dfs로 SCC를 구할 수 있음
+ * 역 그래프를 저장해야 하므로 타잔 알고리즘 보다 메모리가 추가로 필요
  */
 void dfsK(int here) {
   visit[here] = true;
@@ -69,19 +78,19 @@ int main() {
     rvt[t].push_back(s); // 코사라주 알고리즘을 위한 역그래프
   }
 
-  // // 타잔 알고리즘을 통해 SCC를 생성
-  // for(i=1; i<=N; i++) if(!discover[i]) dfsT(i);  // 각 노드별로 SCC 그룹 할당
+  // 타잔 알고리즘을 통해 SCC를 생성
+  for(i=1; i<=N; i++) if(!discover[i]) dfsT(i);  // 각 노드별로 SCC 그룹 할당
 
   // 코사라주 알고리즘을 통해 SCC를 생성
-  for(i=1; i<=N; i++) if(!visit[i]) dfsK(i);
-  while(!st.empty()) {
-    int here = st.top(); st.pop();
-    if(!scc[here]) {
-      sccNum++;
-      dfsK2(here);  // 각 노드별로 SCC 그룹 할당
-      sort(sccDetail[sccNum].begin(), sccDetail[sccNum].end());
-    }
-  }
+  // for(i=1; i<=N; i++) if(!visit[i]) dfsK(i);
+  // while(!st.empty()) {
+  //   int here = st.top(); st.pop();
+  //   if(!scc[here]) {
+  //     sccNum++;
+  //     dfsK2(here);  // 각 노드별로 SCC 그룹 할당
+  //     sort(sccDetail[sccNum].begin(), sccDetail[sccNum].end());
+  //   }
+  // }
 
   // 노드를 순회하며 SCC 그룹 끼리의 유향그래프(sccvt) 생성
   for(i=1; i<=N; i++) for(int n:vt[i])
