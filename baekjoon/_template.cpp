@@ -10,6 +10,12 @@ void writeInt(T x,char e) {if(x<0)writeChar(45),x=-x;char s[24]{};int l=0;while(
 
 int main() {
   ios::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-  freopen("./input/1918.txt", "r", stdin);
+
+  // freopen("./input/1918.txt", "r", stdin);
+  std::ifstream file("./baekjoon/input/10951.txt");
+  if (file.is_open() == false)
+      return 0;
+  std::cin.rdbuf(file.rdbuf()); // swap
+
   return 0;
 }
