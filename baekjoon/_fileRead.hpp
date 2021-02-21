@@ -13,35 +13,41 @@ namespace GNUES
     {
     public:
         FileRead() = delete;
-        FileRead(const std::string& filename)
+        FileRead(const std::string &filename)
         {
             auto path = makeInputFilePath(filename);
 
-            std::ifstream file;
             //prepare f to throw if failbit gets set
-            std::ios_base::iostate exceptionMask = file.exceptions() | std::ios::failbit;
-            file.exceptions(exceptionMask);
+            std::ios_base::iostate exceptionMask = _file.exceptions() | std::ios::failbit;
+            _file.exceptions(exceptionMask);
 
             try
             {
-                file.open(path);
+                _file.open(path);
             }
-            catch (std::ios_base::failure& e)
+            catch (std::ios_base::failure &e)
             {
                 std::cerr << e.what() << '\n';
             }
 
-            if (file.is_open() == false)
+            if (_file.is_open() == false)
             {
                 std::cout << "File read fail.. err[" << strerror(errno) << "], path[" << path << "]";
                 return;
             }
 
-            std::cin.rdbuf(file.rdbuf()); // swap
+            // std::ifstream 객체가 계속 살아있어야 함
+            _cin_buf = std::cin.rdbuf(_file.rdbuf()); // swap
+        }
+
+        virtual ~FileRead()
+        {
+            if (_cin_buf)
+                std::cin.rdbuf(_cin_buf);
         }
 
     private:
-        std::string makeInputFilePath(const std::string& filename)
+        std::string makeInputFilePath(const std::string &filename)
         {
             // 현재는 baekjoon/input/_.txt 형식으로 input text 파일 존재
             // _fileRead 위치에서 ./input/_.txt 전환
@@ -66,11 +72,16 @@ namespace GNUES
             std::stringstream ss(input);
             std::string temp;
 
-            while (getline(ss, temp, delimiter)) {
+            while (getline(ss, temp, delimiter))
+            {
                 answer.push_back(temp);
             }
 
             return answer;
         }
+
+    private:
+        std::ifstream _file;
+        std::streambuf *_cin_buf = nullptr;
     };
-}
+} // namespace GNUES

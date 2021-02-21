@@ -3,6 +3,9 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+// #include "_fileRead.hpp"
+// GNUES::FileRead f("__.txt");
+
 inline int readInt() {int a;scanf("%d",&a);return a;}
 inline void writeChar(char x) {printf("%c",x);}
 template <typename T> inline
