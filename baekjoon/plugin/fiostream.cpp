@@ -1,5 +1,4 @@
 #include<iostream>
-using namespace std;
 
 /**
  * Linux OS based memory mapping code to read input very fast.
@@ -27,12 +26,13 @@ using namespace std;
 // inline int readInt() {
 //   int x=0; bool e;
 //   c += e = *c == '-';
-//   while(*c >= '0') x = x*10 + *c++ - '0'; c++;
+//   while(*c >= '0') x = x*10 + *c++ - '0';
+//   ++c;
 //   return e ? -x : x;
 // }
 // inline void writeChar(char x) { *c++ = x; }
 // template <class T>
-// inline void writeInt(T x, char end) {
+// inline void writeInt(T x, char end = 0) {
 //   if(x < 0) writeChar('-'), x = -x;
 //   char s[24];
 //   int n = 0;
