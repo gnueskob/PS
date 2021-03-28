@@ -40,6 +40,7 @@
 //   while(n--) writeChar(s[n]);
 //   if(end) writeChar(end);
 // }
+// inline void writeWord(const char* s) { while (*s) writeChar(*s++); }
 // inline void resetBuf() { c = s; }
 // struct Flusher {
 //   ~Flusher() { write(1, s, c-s); }
