@@ -62,8 +62,8 @@ namespace GNUES
 		if (end) std::cout << end;
 	}
 }
-
 using namespace GNUES;
+
 int main() {
 	int n = readInt();
 	writeInt(n, '\n');

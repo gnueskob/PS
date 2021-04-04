@@ -30,5 +30,5 @@ inline void writeChar(char x) {
 	*in_s++ = x;
 }
 struct Flusher {
-  ~Flusher() { write(1, out_s, in_s-out_s); }
+  	~Flusher() { write(1, out_s, in_s-out_s); }
 } flusher;
