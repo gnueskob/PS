@@ -76,11 +76,11 @@ namespace GNUES
 		if (end) writeChar(end);
 	}
 }
-using namespace GNUES;
 
 #ifdef GNUES_INPUT
+	#include "plugin/fiostream.hpp"
 	#include "_fileRead.hpp"
-	FileRead f("_test.txt");
+	GNUES::FileRead f("_test.txt");
 #endif
 
 int main() {

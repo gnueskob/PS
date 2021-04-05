@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <tuple>
 
@@ -62,23 +63,23 @@ namespace GNUES
 		if (end) std::cout << end;
 	}
 }
-using namespace GNUES;
 
-int main() {
-	int n = readInt();
-	writeInt(n, '\n');
+// using namespace GNUES;
+// int main() {
+// 	int n = readInt();
+// 	writeInt(n, '\n');
 
-	auto [n1, n2, n3] = readInts<int, int, int>();
-	writeInts(' ', '\n', n1, n2, n3);
+// 	auto [n1, n2, n3] = readInts<int, int, int>();
+// 	writeInts(' ', '\n', n1, n2, n3);
 
-	writeWord("string\n");
+// 	writeWord("string\n");
 
-	char char_str[100];
-	readWord(char_str);
-	writeWord(char_str);
+// 	char char_str[100];
+// 	readWord(char_str);
+// 	writeWord(char_str);
 
-	auto str = readWord();
-	writeWord(str);
+// 	auto str = readWord();
+// 	writeWord(str);
 
-	return 0;
-}
+// 	return 0;
+// }
