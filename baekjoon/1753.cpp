@@ -1,4 +1,5 @@
 // https://www.acmicpc.net/problem/1753
+// #다익스트라
 #include "_fileRead.hpp"
 GNUES::FileRead f("1753.txt");
 
@@ -28,6 +29,7 @@ int main()
         const auto [prev_dist, next_idx] = pq.top();
         pq.pop();
 
+        // 노드의 모든 인접 간선 기준으로 적재하기 때문에 중복해서 적재될 수도 있음
         if (prev_dist > dist[next_idx])
             continue;
 
