@@ -94,7 +94,7 @@ namespace GNUES
 int main() {
     // std::ios::sync_with_stdio(false); std::cin.tie(NULL); std::cout.tie(NULL);
 
-    auto [a, b, c, d] = readInts<int, int, int, int>();
+    auto [a, b, c, d] = GNUES::readInts<int, int, int, int>();
 
     std::cout << a << ' ' << b << ' ' << c << ' ' << d;
 
