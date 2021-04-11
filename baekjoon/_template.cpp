@@ -3,22 +3,30 @@
 
 #include <iostream>
 #include <tuple>
-#include <unistd.h>
-#include <sys/stat.h>
-#include <sys/mman.h>
 namespace GNUES
 {
-	int buf[36];
-	char* out_s = (char*) mmap(0, buf[12], 3, 2, 0, fstat(0, (struct stat*)buf)), *in_s = out_s;
-	inline void resetBuf() { in_s = out_s; }
-	inline char getChar() { return *in_s++; }
-	inline void writeChar(char x) {
-		static bool rs = false;
-		if (rs == false) { resetBuf(), rs = true; }
-		*in_s++ = x;
+	static const int rbuf_size = 1 << 18;
+	inline int getChar() {
+		static char buf[rbuf_size];
+		static int len = 0, pos = 0;
+		if (pos == len) pos = 0, len = fread(buf, 1, rbuf_size, stdin);
+		if (pos == len) return -1;
+		return buf[pos++];
 	}
+
+	static const int wbuf_size = 1 << 18;
+	static int write_pos = 0;
+	static char write_buf[wbuf_size];
+	inline void writeChar(int x) {
+		if (write_pos == wbuf_size)
+			fwrite(write_buf, 1, wbuf_size, stdout), write_pos = 0;
+		write_buf[write_pos++] = x;
+	}
+
 	struct Flusher {
-	~Flusher() { write(1, out_s, in_s-out_s); }
+		~Flusher() {
+			if (write_pos) fwrite(write_buf, 1, write_pos, stdout), write_pos = 0;
+		}
 	} flusher;
 
 	inline char readChar() {
